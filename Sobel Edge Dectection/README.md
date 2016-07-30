@@ -1,6 +1,7 @@
 # Sobel Edge Dectection
 Performs the Sobel Edge Dectection algorithm to any image
 
+### Look at the examples to see what the Sobel Edge Dectection outputs
 
 ## Jars
 Go to the jars directory and run the jar files 
