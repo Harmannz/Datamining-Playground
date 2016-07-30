@@ -1,0 +1,8 @@
+Main-Class: main.LaplacianFilter
+Class-Path: . required_libs/jai_codec.jar required_libs/jai_core.jar required_libs/jai_imageio-1.1.jar
+Manifest-Version: 1.0
+Specification-Version: 1.1
+Specification-Vendor: Sun Microsystems, Inc.
+Implementation-Title: com.sun.media.imageio
+Implementation-Version: 1.1
+Implementation-Vendor: Sun Microsystems, Inc.
