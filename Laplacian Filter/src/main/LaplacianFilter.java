@@ -11,9 +11,13 @@ import javax.imageio.ImageIO;
 
 import util.ImageUtils;
 
+/**
+ * 
+ * @author Harman Singh
+ */
 public class LaplacianFilter {
 	/**
-	 * Performs the Mean Filter on the input image.
+	 * Performs the Laplacian Filter on the input image.
 	 * 
 	 * @param readImg
 	 * @return
@@ -23,7 +27,7 @@ public class LaplacianFilter {
     	// read the input image pixels
         for(int x = 1; x < readImg.getWidth() - 1; x++){
             for(int y = 1; y < readImg.getHeight() - 1; y++){
-            	// perform mean filter on the image
+            	// perform laplacion filter on the image using convolution mask
                 int weight = (int) performConvolution(ImageUtils.getImageMatrix(readImg, x, y));
                 // set the new pixel value of the mean
                 writeImg.setRGB(x,y, weight);
@@ -33,7 +37,7 @@ public class LaplacianFilter {
     }
     
     /**
-     * Performs mean filter based on the convolution mask
+     * Performs laplacian filter based on the convolution mask
      * returns the mean RGB color value of the image matrix
      *  
      * @param imageMatrix

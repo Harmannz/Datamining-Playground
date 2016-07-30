@@ -3,7 +3,7 @@ package util;
 import java.awt.image.BufferedImage;
 
 /**
- * Utility class for Mean Filter
+ * Utility class for Laplacian Filter
  * 
  * @author Harman Singh
  */
