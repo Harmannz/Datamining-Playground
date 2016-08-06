@@ -7,6 +7,10 @@ Performs the Laplacian Filter algorithm to any image
 Go to the jars directory and run the jar files 
 
 ## Dependencies
+Java classes for reading and writing images are used.   
+These can be found in the util folder.   
+> Reference: http://introcs.cs.princeton.edu/java/code/
+
 The program makes use of Java ImageIO class to read and write image files
 
 The following external jar files are required:
