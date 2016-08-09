@@ -3,10 +3,20 @@ package featureextraction;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
+import dao.FeatureVector;
+import dao.FeatureVector.Feature;
+
 public class Main {
+	
+	private static final String FILE_HEADER = "rightEyeMean, leftEyeMean";
+	private static final String COMMA_DELIMITER = ",";
+	private static final String NEW_LINE_DELIMITER = "\n";
 
 	public static void readFiles(final File folder, boolean isFace) throws IOException {
 		for (final File fileEntry : folder.listFiles()) {
@@ -44,31 +54,53 @@ public class Main {
 		}
 		
 		System.out.println("Extracting features from: " + filePath);
-		extractFeatures(data2D, isFace);
+		FeatureVector featureVector = extractFeatures(data2D, isFace);
+		//return feature vector 
+		//write feature vector to file
+		writeFeatureVectorToFile(featureVector);
+		scan.close();
 		dis.close();
 		fileInputStream.close();
 	}
 
-	private static void extractFeatures(int[][] data, boolean isFace){
+	private static void writeFeatureVectorToFile(FeatureVector featureVector) throws IOException{
+		FileWriter pw = null; 
+		try {
+			pw = new FileWriter("data.csv",true);
+			Map<Feature, Double> features = featureVector.getFeatures();
+			pw.append(String.valueOf(features.get(Feature.RightEyeMean)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.LeftEyeMean)));
+			pw.append(NEW_LINE_DELIMITER);
+			
+		} finally {
+			if (pw != null) {
+					pw.close();
+			}
+		}
+	}
+	private static FeatureVector extractFeatures(int[][] data, boolean isFace){
+		
 		// write feature vector to file
 		double leftEyeMean = 0.0, rightEyeMean = 0.0;
 		double leftEyeMeanVal = 0.0, rightEyeMeanVal = 0.0;
-		int count = 0;
+		int leftCount = 0, rightCount = 0;
 		for(int row = 0; row < data.length/2; row++){
 			for(int col = 0; col < data[row].length/2; col++){
-				count++;
+				leftCount++;
 				leftEyeMean += data[row][col];
 			}
-			leftEyeMeanVal = leftEyeMean/count;
-			count = 0;
 			for(int col = data[row].length/2; col < data[row].length; col++){
-				count++;
+				rightCount++;
 				rightEyeMean += data[row][col];
 			}
-			rightEyeMeanVal = rightEyeMean/count;
 		}
-		System.out.println("left eye mean: " + leftEyeMeanVal);
-		System.out.println("right eye mean: " + rightEyeMeanVal);
+		leftEyeMeanVal = leftEyeMean/leftCount;
+		rightEyeMeanVal = rightEyeMean/rightCount;
+		Map<Feature, Double> featureVectors = new HashMap<Feature, Double>();
+		featureVectors.put(Feature.LeftEyeMean, leftEyeMeanVal);
+		featureVectors.put(Feature.RightEyeMean, rightEyeMeanVal);
+		return new FeatureVector(featureVectors, isFace);
 	}
 
 	public static void main(String[] args) {
@@ -76,6 +108,7 @@ public class Main {
 //		File testFolder = new File("data/test");
 		try {
 			readFiles(trainingFolder, true);
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
