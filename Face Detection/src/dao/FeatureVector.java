@@ -1,17 +1,13 @@
 package dao;
 
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class FeatureVector {
 
 	private Map<Feature, Double> features;
-	private boolean classLabel;
 	
-	public FeatureVector(Map<Feature, Double> features, boolean classLabel) {
+	public FeatureVector(Map<Feature, Double> features) {
 		this.features = features;
-		this.classLabel = classLabel;
 	}
 	
 	public Map<Feature, Double> getFeatures() {
@@ -22,22 +18,20 @@ public class FeatureVector {
 		this.features = features;
 	}
 	
-	public boolean isClassLabel() {
-		return classLabel;
-	}
-	
-	public void setClassLabel(boolean classLabel) {
-		this.classLabel = classLabel;
-	}	
-	
 	@Override
 	public String toString() {
-		return "FeatureVector [features=" + features + ", classLabel=" + classLabel + "]";
+		return "FeatureVector [features=" + features + "]";
 	}
 
 	public enum Feature {
 	    RightEyeMean("RightEyeMean"),
-	    LeftEyeMean("LeftEyeMean");
+	    LeftEyeMean("LeftEyeMean"),
+	    NoseMean("NoseMean"),
+	    LipsMean("LipsMean"),
+	    RightEyeSD("RightEyeSD"),
+	    LeftEyeSD("LeftEyeSD"),
+	    NoseSD("NoseSD"),
+	    LipsSD("LipsSD");
 
 	    private final String text;
 

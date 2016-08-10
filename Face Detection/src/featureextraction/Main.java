@@ -5,7 +5,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -14,11 +17,10 @@ import dao.FeatureVector.Feature;
 
 public class Main {
 	
-	private static final String FILE_HEADER = "rightEyeMean, leftEyeMean";
 	private static final String COMMA_DELIMITER = ",";
 	private static final String NEW_LINE_DELIMITER = "\n";
-
-	public static void readFiles(final File folder, boolean isFace) throws IOException {
+	
+	public static void readFiles(final File folder, String isFace) throws IOException {
 		for (final File fileEntry : folder.listFiles()) {
 			if (fileEntry.isDirectory()) {
 				readFiles(fileEntry, isFace);
@@ -28,7 +30,7 @@ public class Main {
 		}
 	}
 
-	public static void readFile(final String filePath, boolean isFace) throws IOException {
+	public static void readFile(final String filePath, String isFace) throws IOException {
 		FileInputStream fileInputStream;
 		fileInputStream = new FileInputStream(filePath);
 		Scanner scan = new Scanner(fileInputStream);
@@ -57,20 +59,40 @@ public class Main {
 		FeatureVector featureVector = extractFeatures(data2D, isFace);
 		//return feature vector 
 		//write feature vector to file
-		writeFeatureVectorToFile(featureVector);
+		writeFeatureVectorToFile(featureVector, isFace);
 		scan.close();
 		dis.close();
 		fileInputStream.close();
 	}
 
-	private static void writeFeatureVectorToFile(FeatureVector featureVector) throws IOException{
+	private static void writeFeatureVectorToFile(FeatureVector featureVector, String isFace) throws IOException{
+		String filename = "test.csv";
 		FileWriter pw = null; 
 		try {
-			pw = new FileWriter("data.csv",true);
+			if(isFace != null){
+				filename = "train.csv";
+			}
+			pw = new FileWriter(filename,true);
 			Map<Feature, Double> features = featureVector.getFeatures();
 			pw.append(String.valueOf(features.get(Feature.RightEyeMean)));
 			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.RightEyeSD)));
+			pw.append(COMMA_DELIMITER);
 			pw.append(String.valueOf(features.get(Feature.LeftEyeMean)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.LeftEyeSD)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.NoseMean)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.NoseSD)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.LipsMean)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.LipsSD)));
+			if (isFace != null){
+				pw.append(COMMA_DELIMITER);
+				pw.append(isFace);
+			}
 			pw.append(NEW_LINE_DELIMITER);
 			
 		} finally {
@@ -79,36 +101,88 @@ public class Main {
 			}
 		}
 	}
-	private static FeatureVector extractFeatures(int[][] data, boolean isFace){
+	private static FeatureVector extractFeatures(int[][] data, String isFace){
+		List<Integer> leftEye = new ArrayList<Integer>();
+		List<Integer> rightEye = new ArrayList<Integer>();
+		List<Integer> nose = new ArrayList<Integer>();
+		List<Integer> lips = new ArrayList<Integer>();
 		
-		// write feature vector to file
-		double leftEyeMean = 0.0, rightEyeMean = 0.0;
-		double leftEyeMeanVal = 0.0, rightEyeMeanVal = 0.0;
-		int leftCount = 0, rightCount = 0;
-		for(int row = 0; row < data.length/2; row++){
+		double noseSum = 0.0, rightEyeSum = 0.0, leftEyeSum = 0.0, lipsSum = 0.0;
+
+		for(int row = 0; row < data.length/4; row++){
 			for(int col = 0; col < data[row].length/2; col++){
-				leftCount++;
-				leftEyeMean += data[row][col];
+				leftEye.add(data[row][col]);
+				leftEyeSum += data[row][col];
 			}
 			for(int col = data[row].length/2; col < data[row].length; col++){
-				rightCount++;
-				rightEyeMean += data[row][col];
+				rightEye.add(data[row][col]);
+				rightEyeSum += data[row][col];
 			}
 		}
-		leftEyeMeanVal = leftEyeMean/leftCount;
-		rightEyeMeanVal = rightEyeMean/rightCount;
+
+		for(int row = data.length/3; row < data.length*2/3; row++){
+			for(int col = data[row].length/4; col < data[row].length*3/4; col++){
+				nose.add(data[row][col]);
+				noseSum += data[row][col];
+			}
+		}
+		for(int row = data.length*2/3; row < data.length; row++){
+			for(int col = 0; col < data[row].length; col++){
+				lips.add(data[row][col]);
+				lipsSum += data[row][col]; 
+			}
+		}
+
 		Map<Feature, Double> featureVectors = new HashMap<Feature, Double>();
-		featureVectors.put(Feature.LeftEyeMean, leftEyeMeanVal);
-		featureVectors.put(Feature.RightEyeMean, rightEyeMeanVal);
-		return new FeatureVector(featureVectors, isFace);
+		
+		featureVectors.put(Feature.NoseMean, noseSum/(1.0 * nose.size()));
+		featureVectors.put(Feature.NoseSD, Math.sqrt(var(nose)));
+		featureVectors.put(Feature.LipsMean,  lipsSum/(1.0 * lips.size()));
+		featureVectors.put(Feature.LipsSD, Math.sqrt(var(lips)));
+		featureVectors.put(Feature.LeftEyeMean, leftEyeSum/(1.0 * leftEye.size()));
+		featureVectors.put(Feature.LeftEyeSD, Math.sqrt(var(leftEye)));
+		featureVectors.put(Feature.RightEyeMean, rightEyeSum/(1.0 * rightEye.size()));
+		featureVectors.put(Feature.RightEyeSD, Math.sqrt(var(rightEye)));
+		
+		return new FeatureVector(featureVectors);
 	}
+	
+    /**
+     * Calculate the mean.
+     */
+    public static double mean(List<Integer> values) {
+		int sum = 0;
+		for (int i = 0; i < values.size(); i++) {
+			sum += values.get(i);
+		}
+        return 1.0 * sum / values.size();
+    }
+    
+    /**
+     * Calculate variance
+     */
+    public static double var(List<Integer> values) {
+        double avg = mean(values);
+        double sum = 0.0;
+        for (int i = 0; i < values.size(); i++) {
+            sum += Math.pow(values.get(i) - avg, 2);
+        }
+        return sum / (values.size() - 1);
+    }
+
 
 	public static void main(String[] args) {
-		File trainingFolder = new File("data/train/face");
+		File trainingFolderFace = new File("data/train/face");
+		File trainingFolderNonFace = new File("data/train/non-face");
+		File testFolderNonFace = new File("data/test/non-face");
+		File testFolderFace = new File("data/test/face");
 //		File testFolder = new File("data/test");
 		try {
-			readFiles(trainingFolder, true);
-			
+			readFiles(trainingFolderFace, "1");
+			readFiles(trainingFolderNonFace, "0");
+			readFiles(testFolderNonFace, null);
+			readFiles(testFolderFace, null);
+			System.out.println("Successfully completed reading files");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
