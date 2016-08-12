@@ -20,17 +20,17 @@ public class Main {
 	private static final String COMMA_DELIMITER = ",";
 	private static final String NEW_LINE_DELIMITER = "\n";
 	
-	public static void readFiles(final File folder, String isFace) throws IOException {
+	public static void readFiles(final File folder, boolean isFace, boolean isTest) throws IOException {
 		for (final File fileEntry : folder.listFiles()) {
 			if (fileEntry.isDirectory()) {
-				readFiles(fileEntry, isFace);
+				readFiles(fileEntry, isFace, isTest);
 			} else {
-				readFile(fileEntry.getAbsolutePath(), isFace);
+				readFile(fileEntry.getAbsolutePath(), isFace, isTest);
 			}
 		}
 	}
 
-	public static void readFile(final String filePath, String isFace) throws IOException {
+	public static void readFile(final String filePath, boolean isFace, boolean isTest) throws IOException {
 		FileInputStream fileInputStream;
 		fileInputStream = new FileInputStream(filePath);
 		Scanner scan = new Scanner(fileInputStream);
@@ -56,21 +56,21 @@ public class Main {
 		}
 		
 		System.out.println("Extracting features from: " + filePath);
-		FeatureVector featureVector = extractFeatures(data2D, isFace);
+		FeatureVector featureVector = extractFeatures(data2D);
 		//return feature vector 
 		//write feature vector to file
-		writeFeatureVectorToFile(featureVector, isFace);
+		writeFeatureVectorToFile(featureVector, isFace, isTest);
 		scan.close();
 		dis.close();
 		fileInputStream.close();
 	}
 
-	private static void writeFeatureVectorToFile(FeatureVector featureVector, String isFace) throws IOException{
-		String filename = "test.csv";
+	private static void writeFeatureVectorToFile(FeatureVector featureVector, boolean isFace, boolean isTest) throws IOException{
+		String filename = "train.csv";
 		FileWriter pw = null; 
 		try {
-			if(isFace != null){
-				filename = "train.csv";
+			if(isTest){
+				filename = "test.csv";
 			}
 			pw = new FileWriter(filename,true);
 			Map<Feature, Double> features = featureVector.getFeatures();
@@ -89,9 +89,11 @@ public class Main {
 			pw.append(String.valueOf(features.get(Feature.LipsMean)));
 			pw.append(COMMA_DELIMITER);
 			pw.append(String.valueOf(features.get(Feature.LipsSD)));
-			if (isFace != null){
-				pw.append(COMMA_DELIMITER);
-				pw.append(isFace);
+			pw.append(COMMA_DELIMITER);
+			if (isFace){
+				pw.append("true");
+			} else {
+				pw.append("false");
 			}
 			pw.append(NEW_LINE_DELIMITER);
 			
@@ -101,7 +103,44 @@ public class Main {
 			}
 		}
 	}
-	private static FeatureVector extractFeatures(int[][] data, String isFace){
+	
+	private static void writeFileHeader(String filename){
+		
+		FileWriter pw = null; 
+		try {
+			
+			pw = new FileWriter(filename,true);
+			
+			pw.append(String.valueOf(Feature.RightEyeMean));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.RightEyeSD)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.LeftEyeMean)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.LeftEyeSD)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.NoseMean)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.NoseSD)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.LipsMean)));
+			pw.append(COMMA_DELIMITER);
+			pw.append(String.valueOf(features.get(Feature.LipsSD)));
+			pw.append(COMMA_DELIMITER);
+			if (isFace){
+				pw.append("true");
+			} else {
+				pw.append("false");
+			}
+			pw.append(NEW_LINE_DELIMITER);
+			
+		} finally {
+			if (pw != null) {
+					pw.close();
+			}
+		}
+	}
+	private static FeatureVector extractFeatures(int[][] data){
 		List<Integer> leftEye = new ArrayList<Integer>();
 		List<Integer> rightEye = new ArrayList<Integer>();
 		List<Integer> nose = new ArrayList<Integer>();
@@ -178,10 +217,10 @@ public class Main {
 		File testFolderFace = new File("data/test/face");
 //		File testFolder = new File("data/test");
 		try {
-			readFiles(trainingFolderFace, "1");
-			readFiles(trainingFolderNonFace, "0");
-			readFiles(testFolderNonFace, null);
-			readFiles(testFolderFace, null);
+			readFiles(trainingFolderFace, true, false);
+			readFiles(trainingFolderNonFace, false, false);
+			readFiles(testFolderNonFace, true, true);
+			readFiles(testFolderFace, false, true);
 			System.out.println("Successfully completed reading files");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
