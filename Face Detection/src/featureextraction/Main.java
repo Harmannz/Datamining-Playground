@@ -104,42 +104,41 @@ public class Main {
 		}
 	}
 	
-	private static void writeFileHeader(String filename){
-		
-		FileWriter pw = null; 
+	private static void writeFileHeader(String filename) {
+		FileWriter pw = null;
 		try {
-			
-			pw = new FileWriter(filename,true);
-			
+			pw = new FileWriter(filename, true);
 			pw.append(String.valueOf(Feature.RightEyeMean));
 			pw.append(COMMA_DELIMITER);
-			pw.append(String.valueOf(features.get(Feature.RightEyeSD)));
+			pw.append(String.valueOf(Feature.RightEyeSD));
 			pw.append(COMMA_DELIMITER);
-			pw.append(String.valueOf(features.get(Feature.LeftEyeMean)));
+			pw.append(String.valueOf(Feature.LeftEyeMean));
 			pw.append(COMMA_DELIMITER);
-			pw.append(String.valueOf(features.get(Feature.LeftEyeSD)));
+			pw.append(String.valueOf(Feature.LeftEyeSD));
 			pw.append(COMMA_DELIMITER);
-			pw.append(String.valueOf(features.get(Feature.NoseMean)));
+			pw.append(String.valueOf(Feature.NoseMean));
 			pw.append(COMMA_DELIMITER);
-			pw.append(String.valueOf(features.get(Feature.NoseSD)));
+			pw.append(String.valueOf(Feature.NoseSD));
 			pw.append(COMMA_DELIMITER);
-			pw.append(String.valueOf(features.get(Feature.LipsMean)));
+			pw.append(String.valueOf(Feature.LipsMean));
 			pw.append(COMMA_DELIMITER);
-			pw.append(String.valueOf(features.get(Feature.LipsSD)));
+			pw.append(String.valueOf(Feature.LipsSD));
 			pw.append(COMMA_DELIMITER);
-			if (isFace){
-				pw.append("true");
-			} else {
-				pw.append("false");
-			}
+			pw.append("Class");
 			pw.append(NEW_LINE_DELIMITER);
-			
+		} catch (IOException e) {
+			System.out.println("Error occurred when writing file header for: " + filename);
 		} finally {
 			if (pw != null) {
+				try {
 					pw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
+	
 	private static FeatureVector extractFeatures(int[][] data){
 		List<Integer> leftEye = new ArrayList<Integer>();
 		List<Integer> rightEye = new ArrayList<Integer>();
@@ -215,12 +214,14 @@ public class Main {
 		File trainingFolderNonFace = new File("data/train/non-face");
 		File testFolderNonFace = new File("data/test/non-face");
 		File testFolderFace = new File("data/test/face");
-//		File testFolder = new File("data/test");
+		
 		try {
+			writeFileHeader("test.csv");
+			writeFileHeader("train.csv");
 			readFiles(trainingFolderFace, true, false);
 			readFiles(trainingFolderNonFace, false, false);
-			readFiles(testFolderNonFace, true, true);
-			readFiles(testFolderFace, false, true);
+			readFiles(testFolderFace, true, true);
+			readFiles(testFolderNonFace, false, true);
 			System.out.println("Successfully completed reading files");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

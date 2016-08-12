@@ -1,0 +1,104 @@
+=== Run information ===
+
+Scheme:       weka.classifiers.bayes.NaiveBayes 
+Relation:     train
+Instances:    6977
+Attributes:   9
+              RightEyeMean
+              RightEyeSD
+              LeftEyeMean
+              LeftEyeSD
+              NoseMean
+              NoseSD
+              LipsMean
+              LipsSD
+              Class
+Test mode:    user supplied test set:  size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Naive Bayes Classifier
+
+                  Class
+Attribute          true    false
+                 (0.35)   (0.65)
+=================================
+RightEyeMean
+  mean          109.1131  89.6123
+  std. dev.      38.7006  44.9536
+  weight sum        2429     4548
+  precision       0.0524   0.0524
+
+RightEyeSD
+  mean           44.6695  34.8278
+  std. dev.      15.3877  17.7211
+  weight sum        2429     4548
+  precision       0.0151   0.0151
+
+LeftEyeMean
+  mean          127.7107  92.4016
+  std. dev.      39.0788  40.4078
+  weight sum        2429     4548
+  precision       0.0467   0.0467
+
+LeftEyeSD
+  mean           60.2804  41.5291
+  std. dev.      20.2132  19.9594
+  weight sum        2429     4548
+  precision       0.0137   0.0137
+
+NoseMean
+  mean          144.1402 102.5595
+  std. dev.      40.7666  48.6935
+  weight sum        2429     4548
+  precision       0.0486   0.0486
+
+NoseSD
+  mean           35.0926  28.2501
+  std. dev.       14.659     18.3
+  weight sum        2429     4548
+  precision       0.0157   0.0157
+
+LipsMean
+  mean          115.9485 101.0777
+  std. dev.        38.34  48.0252
+  weight sum        2429     4548
+  precision       0.0428   0.0428
+
+LipsSD
+  mean            32.964   30.653
+  std. dev.      10.8014  18.9783
+  weight sum        2429     4548
+  precision        0.015    0.015
+
+
+
+Time taken to build model: 0.03 seconds
+
+=== Evaluation on test set ===
+
+Time taken to test model on supplied test set: 0.19 seconds
+
+=== Summary ===
+
+Correctly Classified Instances       17328               72.0649 %
+Incorrectly Classified Instances      6717               27.9351 %
+Kappa statistic                         -0.0042
+Mean absolute error                      0.2809
+Root mean squared error                  0.459 
+Relative absolute error                 79.3144 %
+Root relative squared error            128.7102 %
+Total Number of Instances            24045     
+
+=== Detailed Accuracy By Class ===
+
+                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+                 0.239    0.270    0.017      0.239    0.033      -0.009   0.561     0.021     true
+                 0.730    0.761    0.980      0.730    0.837      -0.009   0.561     0.986     false
+Weighted Avg.    0.721    0.751    0.961      0.721    0.821      -0.009   0.561     0.967     
+
+=== Confusion Matrix ===
+
+     a     b   <-- classified as
+   113   359 |     a = true
+  6358 17215 |     b = false
