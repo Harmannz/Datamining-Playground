@@ -58,3 +58,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+# Jgap source code 
+Genetic Programme/resources/jgap/
