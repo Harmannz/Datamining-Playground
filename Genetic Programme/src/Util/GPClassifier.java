@@ -13,6 +13,7 @@ import org.jgap.gp.function.Add3;
 import org.jgap.gp.function.Divide;
 import org.jgap.gp.function.Multiply;
 import org.jgap.gp.function.Subtract;
+import org.jgap.gp.function.Xor;
 import org.jgap.gp.impl.GPConfiguration;
 import org.jgap.gp.impl.GPGenotype;
 import org.jgap.gp.terminal.Terminal;
@@ -21,8 +22,8 @@ import org.jgap.gp.terminal.Variable;
 import DAO.Instance;
 
 public class GPClassifier extends GPProblem {
-	public static final int X = 1;
-    public static final int Y = 2;
+	public static final int True = 1;
+    public static final int False = 0;
     // terminal set
     private static Variable xValue;
     private static Variable yValue;
@@ -68,12 +69,13 @@ public class GPClassifier extends GPProblem {
 				// We create 8 variables that correspond to the data attributes
 				// and will be set in the fitness function.
 		        // ----------------------------------------------------------
-				xValue = Variable.create(conf, "xvalue", CommandGene.IntegerClass),
-				xValue = Variable.create(conf, "yvalue", CommandGene.IntegerClass),
+				xValue = Variable.create(conf, "x-value", CommandGene.IntegerClass),
+				yValue = Variable.create(conf, "y-value", CommandGene.IntegerClass),
 				
 				new Multiply(conf, CommandGene.IntegerClass), new Add(conf, CommandGene.IntegerClass),
 				new Divide(conf, CommandGene.IntegerClass), new Subtract(conf, CommandGene.IntegerClass),
-				new Terminal(conf, CommandGene.IntegerClass, -1, 10, true),
+				new Xor(conf),
+				new Terminal(conf, CommandGene.IntegerClass, 0, 1, true),
 
 			},
 				{ 
@@ -95,16 +97,17 @@ public class GPClassifier extends GPProblem {
             for (Instance instance : instances) {
                 xValue.set(instance.getxValue());
                 yValue.set(instance.getyValue());
-                
+
                 try {
                     int result = program.execute_int(0, new Object[0]);
                     int predictClass;
 
                     if (result > 0) {
-                    	predictClass = X;
+                    	predictClass = True;
                     } else {
-                    	predictClass = Y;
+                    	predictClass = False;
                     }
+
                     if(predictClass == instance.getClassLabel()){
                     	correct++;
                     }

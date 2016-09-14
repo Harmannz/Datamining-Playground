@@ -31,9 +31,9 @@ public class DataSet {
 				
 			}
 
-//			for(Instance instance : instances){
-//				System.out.println(instance);
-//			}
+			for(Instance instance : instances){
+				System.out.println(instance);
+			}
 			
 		} catch (IOException e) {
 			throw new RuntimeException("Data File caused IO exception");
@@ -49,7 +49,7 @@ public class DataSet {
 		 */
 		Map<String, Integer> instanceData = new HashMap<String, Integer>();
 		for(int i = 0; i < attributeNames.length; i++){
-			instanceData.put(attributeNames[i], Integer.parseInt(data[i]));
+			instanceData.put(attributeNames[i], Integer.parseInt(data[i].trim()));
 		}
 		
 		this.instances.add(new Instance(instanceData));
@@ -57,6 +57,6 @@ public class DataSet {
 	
 	public static void main(String[] args) {
 	
-		new DataSet("breast-cancer-wisconsin.data").loadDataSet();
+		new DataSet("training.txt").loadDataSet();
 	}
 }

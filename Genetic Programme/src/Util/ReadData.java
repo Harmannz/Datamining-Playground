@@ -16,24 +16,19 @@ public class ReadData {
 	 * returns an array of array of the data
 	 */
 	public static void loadDataSet(boolean isTraining, final String filename) {
-		int[][] data = new int[10][699];
+		int[][] data = new int[3][4];
 
 		System.out.println("Reading data from file " + filename);
 		try (Scanner din = new Scanner(new File(filename))) {
 			int i = 0;
 			while (din.hasNextLine()) {
-				//if line contains any of the three class labels
-				//then replace it with its replacement binary digits
-				//
 				String line = din.nextLine();
 				if(StringUtils.isBlank(line)){
 					continue;
 				}
 				String[] lineArr = line.split(",");
-//				System.out.println(Arrays.asList(lineArr));
-				//add to 2d data array
-				for(int j = 1; j < lineArr.length; j++){
-					data[j-1][i] = Integer.parseInt(lineArr[j]);
+				for(int j = 0; j < lineArr.length; j++){
+					data[j][i] = Integer.parseInt(lineArr[j].trim());
 				}
 				i++;
 			}
@@ -41,7 +36,7 @@ public class ReadData {
 				for(int j = data[i].length - 1; j >=0; j--){
 					System.out.printf("%d ",data[i][j]);
 				}
-
+				System.out.println("");
 			}
 
 		} catch (IOException e) {
@@ -50,6 +45,6 @@ public class ReadData {
 	}
 
 	public static void main(String[] args) {
-		loadDataSet(true, "breast-cancer-wisconsin.data");
+		loadDataSet(true, "training.txt");
 	}
 }

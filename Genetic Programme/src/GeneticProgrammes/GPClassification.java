@@ -29,7 +29,7 @@ public class GPClassification {
 			gp = configureGeneticProgram(trainingData);
 			evolveGeneticPopulation(gp);
 			gp.outputSolution(gp.getAllTimeBest());
-			classifyTestData(testData,gp);
+//			classifyTestData(testData,gp);
 		} catch (InvalidConfigurationException e) {
 			System.err.println("Invalid configuration. Exiting program");
 		}
