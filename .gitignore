@@ -60,3 +60,4 @@ fabric.properties
 
 # Jgap source code 
 Genetic Programme/resources/jgap/
+Genetic Programme/.settings/**
