@@ -10,8 +10,11 @@ import org.jgap.gp.GPProblem;
 import org.jgap.gp.IGPProgram;
 import org.jgap.gp.function.Add;
 import org.jgap.gp.function.Add3;
+import org.jgap.gp.function.Cosine;
 import org.jgap.gp.function.Divide;
+import org.jgap.gp.function.Exp;
 import org.jgap.gp.function.Multiply;
+import org.jgap.gp.function.Sine;
 import org.jgap.gp.function.Subtract;
 import org.jgap.gp.function.Xor;
 import org.jgap.gp.impl.GPConfiguration;
@@ -66,16 +69,21 @@ public class GPClassifier extends GPProblem {
         // ----------------------------------------------------------------------
 		CommandGene[][] nodeSets = {
 				{
-				// We create 8 variables that correspond to the data attributes
+				// We create 2 variables that correspond to the data attributes
 				// and will be set in the fitness function.
 		        // ----------------------------------------------------------
-				xValue = Variable.create(conf, "x-value", CommandGene.IntegerClass),
-				yValue = Variable.create(conf, "y-value", CommandGene.IntegerClass),
+				xValue = Variable.create(conf, "x1", CommandGene.IntegerClass),
+				yValue = Variable.create(conf, "x2", CommandGene.IntegerClass),
 				
-				new Multiply(conf, CommandGene.IntegerClass), new Add(conf, CommandGene.IntegerClass),
-				new Divide(conf, CommandGene.IntegerClass), new Subtract(conf, CommandGene.IntegerClass),
-				new Xor(conf),
-				new Terminal(conf, CommandGene.IntegerClass, 0, 1, true),
+				new Multiply(conf, CommandGene.IntegerClass), 
+//				new Add(conf, CommandGene.IntegerClass),
+//				new Divide(conf, CommandGene.IntegerClass), 
+				new Subtract(conf, CommandGene.IntegerClass),
+//				new Sine(conf, CommandGene.FloatClass),
+//				new Cosine(conf, CommandGene.FloatClass),
+//				new Exp(conf, CommandGene.FloatClass),
+//				new Xor(conf),
+//				new Terminal(conf, CommandGene.IntegerClass, 0, 1, true),
 
 			},
 				{ 
