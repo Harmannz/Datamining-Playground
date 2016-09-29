@@ -1,0 +1,41 @@
+[30.09.2016 02:40:52,735] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution: ((((cosine (sine (sine ((sine 1.0) + 1.0)))) * 1.0) + 1.0) + ((((((Exp(1.0)) * (((sine (Exp(1.0))) / (Exp(1.0))) + ((cosine ((Exp(1.0)) - X)) + ((cosine ((((sine X) + ((Exp(1.0)) / ((1.0 - (X / 1.0)) + ((1.0 * 1.0) * (1.0 / 1.0))))) * (X - 1.0)) * ((X - 1.0) - (Exp(1.0))))) + 1.0)))) / (1.0 * 1.0)) + (1.0 + (sine (sine ((cosine 1.0) - 1.0))))) + X) + (X + 1.0))) / ((sine (sine ((sine (1.0 / X)) + ((1.0 * 1.0) * (1.0 / 1.0))))) + ((Exp((X / 1.0))) - ((1.0 / 1.0) * (sine 1.0))))
+[30.09.2016 02:40:52,735] [main] INFO  org.jgap.gp.impl.GPGenotype  - Depth of chrom: 18
+[30.09.2016 02:40:52,736] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 50, memory free: 192.0 MB
+[30.09.2016 02:40:53,918] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 51, memory free: 166.0 MB
+[30.09.2016 02:40:54,847] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 52, memory free: 187.6 MB
+[30.09.2016 02:40:55,739] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 53, memory free: 209.1 MB
+[30.09.2016 02:40:56,695] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 54, memory free: 184.5 MB
+[30.09.2016 02:40:57,655] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 55, memory free: 206.1 MB
+[30.09.2016 02:40:58,560] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution fitness: 139.60
+[30.09.2016 02:40:58,561] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution: ((((cosine (sine (sine ((sine (sine ((sine (1.0 / X)) + ((1.0 * 1.0) * (1.0 / 1.0))))) + 1.0)))) * 1.0) + 1.0) + ((((((Exp(1.0)) * (((sine (Exp(1.0))) / (Exp(1.0))) + ((cosine ((Exp(1.0)) - X)) + ((cosine ((((sine X) + ((Exp(1.0)) / ((1.0 - (X / 1.0)) + (1.0 * (1.0 / 1.0))))) * (X - 1.0)) * ((X - 1.0) - (Exp(1.0))))) + 1.0)))) / 1.0) + (1.0 + (sine (sine ((cosine 1.0) - 1.0))))) + X) + (X + 1.0))) / ((sine (sine ((sine (1.0 / X)) + ((1.0 * 1.0) * (1.0 / 1.0))))) + ((Exp((X / 1.0))) - ((1.0 / 1.0) * (sine 1.0))))
+[30.09.2016 02:40:58,561] [main] INFO  org.jgap.gp.impl.GPGenotype  - Depth of chrom: 18
+[30.09.2016 02:40:58,561] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 56, memory free: 180.0 MB
+[30.09.2016 02:40:59,524] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 57, memory free: 200.1 MB
+[30.09.2016 02:41:00,476] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 58, memory free: 176.0 MB
+[30.09.2016 02:41:01,428] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 59, memory free: 194.8 MB
+[30.09.2016 02:41:02,373] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 60, memory free: 169.3 MB
+[30.09.2016 02:41:03,319] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution fitness: 139.58
+[30.09.2016 02:41:03,319] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution: ((((cosine (sine (sine ((sine (sine ((1.0 * (1.0 * 1.0)) + ((1.0 * 1.0) * (1.0 / 1.0))))) + 1.0)))) * 1.0) + 1.0) + ((((((Exp(1.0)) * (((sine (Exp(1.0))) / (Exp(1.0))) + ((cosine ((Exp(1.0)) - X)) + ((cosine ((((sine X) + ((Exp(1.0)) / ((1.0 - (X / 1.0)) + (1.0 * (1.0 / 1.0))))) * (X - 1.0)) * ((X - 1.0) - (Exp(1.0))))) + 1.0)))) / 1.0) + (1.0 + (sine (sine ((cosine 1.0) - 1.0))))) + X) + (X + 1.0))) / ((sine (sine ((sine (1.0 / X)) + ((1.0 * 1.0) * (1.0 / 1.0))))) + ((Exp((X / 1.0))) - ((1.0 / 1.0) * (sine 1.0))))
+[30.09.2016 02:41:03,319] [main] INFO  org.jgap.gp.impl.GPGenotype  - Depth of chrom: 18
+[30.09.2016 02:41:03,320] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 61, memory free: 186.8 MB
+[30.09.2016 02:41:04,274] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 62, memory free: 205.1 MB
+[30.09.2016 02:41:05,220] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 63, memory free: 180.1 MB
+[30.09.2016 02:41:06,140] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution fitness: 138.16
+[30.09.2016 02:41:06,143] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution: ((((cosine (X / 1.0)) * 1.0) + 1.0) + ((((((Exp(1.0)) * (((sine (Exp(1.0))) / (Exp(1.0))) + ((cosine ((Exp(1.0)) - X)) + ((cosine ((((sine X) + ((Exp(1.0)) / ((1.0 - (X / 1.0)) + (1.0 * (1.0 / 1.0))))) * (X - 1.0)) * ((X - 1.0) - (Exp(1.0))))) + 1.0)))) / 1.0) + (1.0 + (X - X))) + X) + (X + 1.0))) / ((sine (sine ((sine (1.0 / X)) + ((1.0 * 1.0) * (1.0 / 1.0))))) + ((Exp((X / 1.0))) - ((1.0 / 1.0) * (sine 1.0))))
+[30.09.2016 02:41:06,144] [main] INFO  org.jgap.gp.impl.GPGenotype  - Depth of chrom: 18
+[30.09.2016 02:41:06,144] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 64, memory free: 199.7 MB
+[30.09.2016 02:41:07,331] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution fitness: 137.42
+[30.09.2016 02:41:07,331] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution: ((((cosine (sine (sine (Exp(1.0))))) * 1.0) + 1.0) + ((((((Exp(1.0)) * (((sine (Exp(1.0))) / (Exp(1.0))) + ((cosine ((X - 1.0) - ((1.0 + 1.0) * (cosine (1.0 - 1.0))))) + ((cosine ((((sine X) + ((Exp(1.0)) / ((1.0 - (X / 1.0)) + (1.0 * (1.0 / 1.0))))) * (X - 1.0)) * ((X - 1.0) - (Exp(1.0))))) + 1.0)))) / 1.0) + (1.0 + (sine (sine ((cosine 1.0) - 1.0))))) + X) + (X + 1.0))) / ((sine (sine ((sine (1.0 / X)) + (1.0 * (1.0 / 1.0))))) + ((Exp((X / 1.0))) - ((1.0 / 1.0) * (sine 1.0))))
+[30.09.2016 02:41:07,332] [main] INFO  org.jgap.gp.impl.GPGenotype  - Depth of chrom: 18
+[30.09.2016 02:41:07,332] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 65, memory free: 175.9 MB
+[30.09.2016 02:41:08,351] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 66, memory free: 193.0 MB
+[30.09.2016 02:41:09,297] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution fitness: 88.95
+[30.09.2016 02:41:09,297] [main] INFO  org.jgap.gp.impl.GPGenotype  - Best solution: ((((cosine (sine (sine (Exp(1.0))))) * 1.0) + 1.0) + ((((((Exp(1.0)) * ((sine (((X + 1.0) / (Exp(1.0))) - 1.0)) + ((cosine ((X - 1.0) - ((1.0 + 1.0) * (cosine (1.0 - 1.0))))) + ((cosine ((((sine X) + ((Exp(1.0)) / ((1.0 - (X / 1.0)) + (1.0 * (1.0 / 1.0))))) * (X - 1.0)) * ((X - 1.0) - (Exp(1.0))))) + 1.0)))) / 1.0) + (1.0 + (sine (sine ((cosine 1.0) - 1.0))))) + X) + (X + 1.0))) / ((sine (sine ((sine (1.0 / X)) + (1.0 * (1.0 / 1.0))))) + ((Exp((X / 1.0))) - ((1.0 / 1.0) * (sine 1.0))))
+[30.09.2016 02:41:09,297] [main] INFO  org.jgap.gp.impl.GPGenotype  - Depth of chrom: 18
+[30.09.2016 02:41:09,297] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 67, memory free: 167.8 MB
+[30.09.2016 02:41:10,300] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 68, memory free: 186.1 MB
+[30.09.2016 02:41:11,367] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 69, memory free: 200.8 MB
+[30.09.2016 02:41:12,430] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 70, memory free: 177.0 MB
+[30.09.2016 02:41:13,467] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 71, memory free: 192.5 MB
+[30.09.2016 02:41:14,455] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 72, memory free: 167.4 MB
+[30.09.2016 02:41:15,442] [main] INFO  org.jgap.gp.impl.GPGenotype  - Evolving generation 73, memory free: 181.8 MB
